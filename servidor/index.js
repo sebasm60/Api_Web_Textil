@@ -7,7 +7,7 @@ const path = require('path');
 
 const app = express();
 require('dotenv').config();
-//require('./configuraciones/databaseMongodb');
+require('./settings/MongoDB');
 
 //Configuracion.
 app.set('port', process.env.PORT);

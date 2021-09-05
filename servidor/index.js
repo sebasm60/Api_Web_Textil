@@ -20,7 +20,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 //Routes.
-
+app.use('/signup', require('./routes/accountsRoutes'));
 
 //Iniciar el servidor.
 app.listen(app.get('port'), () => {

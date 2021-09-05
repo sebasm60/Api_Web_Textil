@@ -8,3 +8,8 @@ PLATAFORMA DE PRODUCCIÓN PARA EL SECTOR DE CONFECCIONES TEXTIL EN TELA INDIGO  
 4) path.
 5) nodemon.
 6) dotenv.
+7) mongoose.
+8) bcrypt (Se usa para encriptar la contraseña).
+
+# Dependencias usadas en el Front.
+

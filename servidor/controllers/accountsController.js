@@ -15,4 +15,9 @@ controller.signup = async (req, res) => {
     };
 };
 
+controller.list = async (req, res) =>{
+    const accounts = await account.find();
+    res.json(accounts);
+};
+
 module.exports = controller;

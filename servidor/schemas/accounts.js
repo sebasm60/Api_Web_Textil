@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 const bcrypt = require('bcrypt');
 
 const accounts = new Schema({
-    correo: {
+    email: {
         type: String,
         required: true,
         unique: true,

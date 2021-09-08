@@ -13,3 +13,5 @@ PLATAFORMA DE PRODUCCIÓN PARA EL SECTOR DE CONFECCIONES TEXTIL EN TELA INDIGO  
 
 # Dependencias usadas en el Front.
 
+1) React.
+2) Hooks.

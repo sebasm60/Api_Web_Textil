@@ -76,6 +76,13 @@ export default withFormik({
     async handleSubmit(values, formikBag) {
         formikBag.setSubmitting(false);
         const user = await axios.post(`http://localhost:5000/api/login`, values);
-        console.log(user);      
+
+        if(user.data.messaje === 'User not found'){
+            alert('User not found');
+        } else if (user.data.messaje === "Password wrong"){
+            alert('password wrong');
+        } else {
+            window.location.href = './dashboard';
+        }
     }
 })(Login);

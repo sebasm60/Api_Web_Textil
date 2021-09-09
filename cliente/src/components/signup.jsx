@@ -65,8 +65,11 @@ export default withFormik({
     },
 
     async handleSubmit(values, formikBag) {
-        formikBag.setSubmitting(false);
-        const user = await axios.post(`http://localhost:5000/api/login`, values);
-        console.log(user);      
+        formikBag.setSubmitting(false);        
+        const user = await axios.post(`http://localhost:5000/api/signup`, values);
+
+        if (user.data.error === 11000) {
+            alert('User already exists');
+        }
     }
 })(Signup);

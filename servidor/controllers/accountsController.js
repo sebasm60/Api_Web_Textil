@@ -11,28 +11,27 @@ controller.signup = async (req, res) => {
             password
         });
         await newAccount.save();
-        res.json(newAccount);
+        res.json({ newAccount });
     } catch(e){
-        res.status(500).json({errorCode: e.err, message: 'Error en el servidor'});
+        res.send({ status: 404, message: 'Error en el servidor', error: e.code });
     };
 };
 
 //Funcion para iniciar sesion.
 controller.login = async (req, res) => {
     const {email, password} = req.body;
-    account.findOne({email})
+    await account.findOne({email})
     .then( user => {
-        if(!user) res.status(404).send({messaje : 'User not found'});
+        if(!user) res.send({status: 404, messaje : 'User not found'});    
         bcrypt.compare(password, user.password)
         .then(match => {
             if(match){
                 payload = {
-                    email: user.email,
-                    password: user.password
+                    email: user.email
                 };
                 res.status(200).send({messaje : 'Access successful', payload});
             } else {
-                res.status(404).send({messaje : 'Password wrong'});
+                res.send({status: 404, messaje : 'Password wrong'});;
             }
         })
         .catch(err => {

@@ -1,5 +1,6 @@
 import { withFormik, Field, ErrorMessage, Form } from 'formik';
 import axios from "axios";
+import Swal from 'sweetalert';
 
 function Signup(props) {
 
@@ -69,7 +70,17 @@ export default withFormik({
         const user = await axios.post(`http://localhost:5000/api/signup`, values);
 
         if (user.data.error === 11000) {
-            alert('User already exists');
+            Swal({
+                title: 'User already exists',
+                text: 'The user has already been created',
+                icon: 'warning'
+            });
+        } else {
+            Swal({
+                title: 'User created successfully',
+                text: 'The user was created successfully',
+                icon: 'success'
+            })
         }
     }
 })(Signup);

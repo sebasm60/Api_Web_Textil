@@ -31,7 +31,7 @@ controller.login = async (req, res) => {
                 };
                 res.status(200).send({messaje : 'Access successful', payload});
             } else {
-                res.send({status: 404, messaje : 'Password wrong'});;
+                res.send({status: 404, messaje : 'Password wrong'});
             }
         })
         .catch(err => {
@@ -39,7 +39,6 @@ controller.login = async (req, res) => {
         });
     })
     .catch(err => {
-        console.log(err);
         res.status(500).send(err);
     });
 };

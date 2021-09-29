@@ -19,8 +19,9 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
-//Routes.
+//Routes(Uso de las rutas a donde se realizara las peticiones).
 app.use('/api', require('./routes/accountsRoutes'));
+app.use('/api', require('./routes/prendasRoutes'));
 
 //Iniciar el servidor.
 app.listen(app.get('port'), () => {

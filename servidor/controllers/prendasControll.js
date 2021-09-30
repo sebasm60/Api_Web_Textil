@@ -105,7 +105,7 @@ controller.list = async (req, res) => {
         res.json(prendas[0]);
     } catch (e) {
         res.send({ status: 404, message: 'Error en el servidor', error: e });
-    }
+    };
 };
 
 module.exports = controller;

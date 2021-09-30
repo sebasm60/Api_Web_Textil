@@ -22,6 +22,8 @@ app.use(express.urlencoded({extended: false}));
 //Routes(Uso de las rutas a donde se realizara las peticiones).
 app.use('/api', require('./routes/accountsRoutes'));
 app.use('/api', require('./routes/prendasRoutes'));
+app.use('/api', require('./routes/clientePrendaRoutes'));
+app.use('/api', require('./routes/tallerPrendaRoutes'));
 
 //Iniciar el servidor.
 app.listen(app.get('port'), () => {

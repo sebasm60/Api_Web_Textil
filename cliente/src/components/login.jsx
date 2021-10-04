@@ -1,7 +1,7 @@
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import { useState } from 'react';
 import axios from "axios";
-import Swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 function Login() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,13 +36,13 @@ function Login() {
                 const user = await axios.post(`http://localhost:5000/api/login`, values);
                 
                 if(user.data.messaje === 'User not found'){
-                    Swal({
+                    Swal.fire({
                         title: 'User not found',
                         text: 'The user does not exist',
                         icon: 'error'
                     });
                 } else if (user.data.messaje === "Password wrong"){
-                    Swal({
+                    Swal.fire({
                         title: 'Password wrong',
                         text: 'The password is incorrect',
                         icon: 'warning'

@@ -90,9 +90,9 @@ controller.update = (req, res) => {
 //Funcion para eliminar una prenda
 controller.delete = (req, res) => {
     try {
-        const { id_prenda } = req.body;
-        cnn_mysql.query(`DELETE FROM prendas WHERE id_prenda = ?`, [id_prenda]);
-        res.json({message: 'Eliminado correctamente', prenda : id_prenda});
+        const { id } = req.params;
+        cnn_mysql.query(`DELETE FROM prendas WHERE id_prenda = ?`, [id]);
+        res.json({message: 'Eliminado correctamente', prenda : id});
     } catch (e) {
         res.send({ status: 404, message: 'Error en el servidor', error: e.code });
     };

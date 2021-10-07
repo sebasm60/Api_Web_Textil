@@ -30,11 +30,11 @@ DROP TABLE IF EXISTS prendas;
 CREATE TABLE prendas (
     id_prenda INT(10) UNSIGNED PRIMARY KEY,
     lote INT(10) NOT NULL UNIQUE,
-    genero_prenda VARCHAR(25) NOT NULL,
-    tipo_prenda VARCHAR(25) NOT NULL,
+    genero_prenda ENUM('Masculino', 'Femenino') NOT NULL,
+    tipo_prenda ENUM('Vestidos', 'Pantalones', 'Faldas', 'Chaquetas', 'Vermudas', 'Chorts', 'Camisas') NOT NULL,
     talla_prenda VARCHAR(10) NOT NULL,
-    muestra_fisica BOOLEAN NOT NULL,
-    tipo_empaque VARCHAR(25) NOT NULL,
+    muestra_fisica ENUM ('Si', 'No') NOT NULL,
+    tipo_empaque ENUM ('Basico', 'Protegido', 'Aislado') NOT NULL,
     cantidad_existente INT(10) NOT NULL,
     cliente_prenda INT(10) NOT NULL,    
     taller_prenda INT(10) NOT NULL,
@@ -52,5 +52,5 @@ VALUES (20001, 'Boza', '4444444'),
 (20002, 'Indicol', '5555555');
 
 INSERT INTO prendas(id_prenda, lote, genero_prenda, tipo_prenda, talla_prenda, muestra_fisica, tipo_empaque, cantidad_existente, cliente_prenda, taller_prenda)
-VALUES (40001, 11025641, 'Masculino', 'Pantalon', '36', true, 'Individual', 25, 30001, 20001),
-(40002, 11025642, 'Femenino', 'Chaqueta', '14', false, 'Individual', 25, 30002, 20002);
+VALUES (40001, 11025641, 'Masculino', 'Pantalones', '36', 'si', 'Basico', 25, 30001, 20001),
+(40002, 11025642, 'Femenino', 'Chaquetas', '14', 'no', 'Basico', 25, 30002, 20002);

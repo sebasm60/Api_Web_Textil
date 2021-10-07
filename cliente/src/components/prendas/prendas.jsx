@@ -1,5 +1,8 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+
 import '../styles/tabs.css';
+
 import AddPrenda from './addPrenda';
 import Listar from './listar';
 import Delete from './delete';
@@ -7,13 +10,37 @@ import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
 
-function prendas() {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
+function Prendas() {
     const [toggleState, setToggleState] = useState(1);
+    const [clientesPrendas, setClientesPrendas] = useState([]);
+    const [tallerPrendas, setTallerPrendas] = useState([]);
+    const [prendas, setPrendas] = useState([]);
 
     const toggleTab = (index) => {
         setToggleState(index);
-    }
+    };
+
+    useEffect(() => {
+
+        async function obtenerClientes() {
+            const res = await axios.get('http://localhost:5000/api/listarClientePrendas');
+            setClientesPrendas(res.data);
+        };
+
+        async function obtenerTalleres() {
+            const res = await axios.get('http://localhost:5000/api/listarTallerPrendas');
+            setTallerPrendas(res.data);
+        };
+
+        async function obtenerPrendas() {
+            const res = await axios.get('http://localhost:5000/api/listarprendas');
+            setPrendas(res.data);
+        };
+
+        obtenerClientes(); 
+        obtenerTalleres();
+        obtenerPrendas();  
+    }, []);
 
     return (
         <>
@@ -39,13 +66,24 @@ function prendas() {
 
                 <div className="content-tabs">
                     <div className={toggleState === 1 ? "content active-content" : "content"}>
-                        <Listar />
+                        <Listar 
+                            cliente={clientesPrendas}
+                            taller = {tallerPrendas}
+                            prendas={prendas}
+                        />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <AddPrenda />
+                        <AddPrenda 
+                            cliente={clientesPrendas}
+                            taller = {tallerPrendas}
+                            prendas={prendas}
+                        />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
-                        <Editar/>
+                        <Editar
+                            cliente={clientesPrendas}
+                            taller = {tallerPrendas}
+                        />
                     </div>
                     <div className={toggleState === 4 ? "content active-content" : "content"}>
                         <Buscar />
@@ -59,4 +97,4 @@ function prendas() {
     );
 };
 
-export default prendas;
+export default Prendas;

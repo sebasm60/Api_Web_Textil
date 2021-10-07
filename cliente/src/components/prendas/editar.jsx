@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Formik, /*ErrorMessage,*/ Field, Form } from 'formik';
+import { Formik, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
 
-function Editar() {
+function Editar(props) {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -47,12 +47,25 @@ function Editar() {
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Genero de la prenda</span>' +
-                                `<input class="form-control" id="swal-generoPrenda" value=${res.data[0].genero_prenda}></input>` +
+                                `<select class="form-select" id="swal-generoPrenda" value=${res.data[0].genero_prenda}>
+                                    <option value=${res.data[0].genero_prenda} selected=true>${res.data[0].genero_prenda}</option>
+                                    <option value="Masculino">Masculino</option>
+                                    <option value="Femenino">Femenino</option>
+                                </select>` +
                                 '</div>' +
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Tipo de prenda</span>' +
-                                `<input class="form-control" id="swal-tipoPrenda" value=${res.data[0].tipo_prenda}></input>` +
+                                `<select class="form-select" id="swal-tipoPrenda">
+                                    <option value=${res.data[0].tipo_prenda} selected=true>${res.data[0].tipo_prenda}</option>
+                                    <option value="Vestidos">Vestidos</option>
+                                    <option value="Pantalones">Pantalones</option>
+                                    <option value="Faldas">Faldas</option>
+                                    <option value="Chaquetas">Chaquetas</option>
+                                    <option value="Vermudas">Vermudas</option>
+                                    <option value="Chorts">Chorts</option>
+                                    <option value="Camisas">Camisas</option>
+                                </select>` +
                                 '</div>' +
 
                                 '<div class="input-group mb-2">' +
@@ -62,12 +75,21 @@ function Editar() {
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Muestra fisica</span>' +
-                                `<input class="form-control" id="swal-muestraFisica" value=${res.data[0].muestra_fisica}></input>` +
+                                `<select class="form-select" id="swal-muestraFisica">
+                                    <option value=${res.data[0].muestra_fisica} selected=true>${res.data[0].muestra_fisica}</option>
+                                    <option value="Si">Si</option>
+                                    <option value="No">No</option>
+                                </select>` +
                                 '</div>' +
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Tipo de empaque</span>' +
-                                `<input class="form-control" id="swal-tipoEmpaque" value=${res.data[0].tipo_empaque}></input>` +
+                                `<select class="form-select" id="swal-tipoEmpaque">
+                                    <option value=${res.data[0].tipo_empaque} selected=true>${res.data[0].tipo_empaque}</option>
+                                    <option value="Basico">Basico</option>
+                                    <option value="Protegido">Protegido</option>
+                                    <option value="Aislado">Aislado</option>
+                                </select>` +
                                 '</div>' +
 
                                 '<div class="input-group mb-2">' +
@@ -77,16 +99,31 @@ function Editar() {
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Cliente de la prenda</span>' +
-                                `<input class="form-control" id="swal-clientePrenda" value=${res.data[0].cliente_prenda}></input>` +
+                                `<select class="form-select" id="swal-clientePrenda">
+                                    <option value=${res.data[0].cliente_prenda} selected=true>${props.cliente.map(cliente =>(
+                                        (cliente.nit === res.data[0].cliente_prenda)?(cliente.nombre):null                                    
+                                    ))}</option>
+                                    ${props.cliente.map((cliente) => (
+                                        `<option value=${cliente.nit}>${cliente.nombre}</option>`
+                                    ))}
+                                </select>` +
                                 '</div>' +
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Taller de la prenda</span>' +
-                                `<input class="form-control" id="swal-tallerPrenda" value=${res.data[0].taller_prenda}></input>` +
+                                `<select class="form-select" id="swal-tallerPrenda">
+                                    <option value=${res.data[0].taller_prenda} selected=true>${props.taller.map((taller) =>(
+                                        (taller.nit === res.data[0].taller_prenda)?(taller.nombre):null                                    
+                                    ))}</option>
+                                    ${props.taller.map((taller) => (
+                                        `<option value=${taller.nit}>${taller.nombre}</option>`
+                                    ))}
+                                </select>` +
                                 '</div>',
+                                
                             focusConfirm: false,
-                            preConfirm:() => {
-                                return[
+                            preConfirm: () => {
+                                return [
                                     document.getElementById('swal-lote').value,
                                     document.getElementById('swal-generoPrenda').value,
                                     document.getElementById('swal-tipoPrenda').value,
@@ -100,34 +137,35 @@ function Editar() {
                                 ]
                             }
                         })
-                        .then(async (result) => {
-                            if(result.isConfirmed){
-                                await axios.put(`http://localhost:5000/api/updatePrenda`,{
-                                lote: result.value[0],
-                                genero_prenda: result.value[1],
-                                tipo_prenda: result.value[2],
-                                talla_prenda: result.value[3],
-                                muestra_fisica: result.value[4],
-                                tipo_empaque: result.value[5],
-                                cantidad_existente: result.value[6],
-                                cliente_prenda: result.value[7],
-                                taller_prenda: result.value[8],
-                                id_prenda: values.id_prenda
+                            .then(async (result) => {
+                                if (result.isConfirmed) {
+                                    await axios.put(`http://localhost:5000/api/updatePrenda`, {
+                                        lote: result.value[0],
+                                        genero_prenda: result.value[1],
+                                        tipo_prenda: result.value[2],
+                                        talla_prenda: result.value[3],
+                                        muestra_fisica: result.value[4],
+                                        tipo_empaque: result.value[5],
+                                        cantidad_existente: result.value[6],
+                                        cliente_prenda: result.value[7],
+                                        taller_prenda: result.value[8],
+                                        id_prenda: values.id_prenda
+                                    });
+                                    swalBootstrap.fire({
+                                        title: 'Guardado',
+                                        text: 'Cambios realizados',
+                                        icon: 'success'
+                                    }).then(result => {
+                                        if(result.isConfirmed)window.location.reload();
+                                    })
+                                } else {
+                                    swalBootstrap.fire({
+                                        title: 'Cancelado',
+                                        text: 'No se realizaron cambios',
+                                        icon: 'error'
+                                    });
+                                }
                             });
-
-                            swalBootstrap.fire({
-                                title: 'Guardado',
-                                text: 'Cambios realizados',
-                                icon: 'success'
-                            })
-                            }else{
-                                swalBootstrap.fire({
-                                    title: 'Cancelado',
-                                    text: 'No se realizaron cambios',
-                                    icon: 'error'
-                                });
-                            }                      
-                        });
                     } else {
                         swalBootstrap.fire({
                             title: 'Error',

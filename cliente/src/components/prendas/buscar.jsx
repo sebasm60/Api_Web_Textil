@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
-import { Formik, /*ErrorMessage,*/ Field, Form } from 'formik';
+import { Formik, ErrorMessage, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
 
 function Buscar() {
@@ -18,6 +18,12 @@ function Buscar() {
 
                 validate={(values) => {
                     const errors = {};
+
+                    if(!values.id_prenda) {
+                        errors.id_prenda = 'Por favor ingrese el identificador de la prenda.';
+                    } else if(!/^[0-9]+$/.test(values.id_prenda)){
+                        errors.id_prenda = 'Solo se permiten caracteres numericos.'
+                    };
 
                     return errors;
                 }}
@@ -104,6 +110,11 @@ function Buscar() {
                                 id="id_prenda"
                                 type="text"
                             />
+                        </div>
+                        <div className="input-group mb-2">
+                            <ErrorMessage ErrorMessage name="id_prenda">
+                                {message => <div className="alert alert-danger">{message}</div>}
+                            </ErrorMessage>
                         </div>
 
                         <button

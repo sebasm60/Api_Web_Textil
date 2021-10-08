@@ -15,8 +15,8 @@ function Signup(props) {
 
             <div className="input-div">
                 <div>
-                    <Field className="input" name="email" type="email" placeholder="email"/>
-                    <ErrorMessage   ErrorMessage name="email">
+                    <Field className="input" name="EMAIL" type="email" placeholder="email"/>
+                    <ErrorMessage   ErrorMessage name="EMAIL">
                         {message => <div className="error">{message}</div>}
                     </ErrorMessage>
                 </div>
@@ -24,8 +24,8 @@ function Signup(props) {
 
             <div className="input-div">
                 <div>
-                    <Field className="input" name="password" type="password" placeholder="Password"/>
-                    <ErrorMessage   ErrorMessage name="password">
+                    <Field className="input" name="PASS" type="password" placeholder="Password"/>
+                    <ErrorMessage   ErrorMessage name="PASS">
                         {message => <div className="error">{message}</div>}
                     </ErrorMessage>
                 </div>
@@ -33,7 +33,7 @@ function Signup(props) {
 
             <button 
                 type="submit"
-                className={`submit btn ${isSubmitting || !isValid ? 'disabled' : ''}`}
+                className={`submit ${isSubmitting || !isValid ? 'disabled' : ''}`}
                 disabled={isSubmitting || !isValid}>
                 Sign In
             </button>
@@ -44,22 +44,22 @@ function Signup(props) {
 export default withFormik({
     mapPropsToValues(props){
         return{
-            email: '',
-            password: ''
+            EMAIL: '',
+            PASS: ''
         };
     },
 
     validate(values) {
         const errors = {};
 
-        if(!values.password) {
-            errors.password = 'Password is required';
-        } else if(values.password.length < 3){
-            errors.password = 'Password must be at least 4 characters'
+        if(!values.PASS) {
+            errors.PASS = 'Password is required';
+        } else if(values.PASS.length < 3){
+            errors.PASS = 'Password must be at least 4 characters'
         }
         
-        if(!values.email) {
-            errors.email = 'Email is required';
+        if(!values.EMAIL) {
+            errors.EMAIL = 'Email is required';
         } 
 
         return errors;
@@ -81,6 +81,6 @@ export default withFormik({
                 text: 'The user was created successfully',
                 icon: 'success'
             })
-        }
+        };
     }
 })(Signup);

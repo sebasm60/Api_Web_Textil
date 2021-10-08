@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 
 function AddPrenda(props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    
+
     return (
         <div className="container mt-5">
             <Formik
@@ -25,57 +25,57 @@ function AddPrenda(props) {
                 validate={(values) => {
                     const errors = {};
 
-                    if(!values.id_prenda) {
+                    if (!values.id_prenda) {
                         errors.id_prenda = 'Por favor ingrese el identificador de la prenda.';
-                    } else if(!/^[0-9]+$/.test(values.id_prenda)){
+                    } else if (!/^[0-9]+$/.test(values.id_prenda)) {
                         errors.id_prenda = 'Solo se permiten caracteres numericos.'
                     };
 
-                    if(!values.lote) {
+                    if (!values.lote) {
                         errors.lote = 'Por favor ingrese el lote de la prenda.';
-                    } else if(!/^[0-9]+$/.test(values.lote)){
+                    } else if (!/^[0-9]+$/.test(values.lote)) {
                         errors.lote = 'Solo se permiten caracteres numericos.'
                     };
 
-                    for(let i = 0; i < props.prendas.length; i++){
-                        if(values.lote == props.prendas[i].lote){
+                    for (let i = 0; i < props.prendas.length; i++) {
+                        if (values.lote == props.prendas[i].lote) {
                             errors.lote = 'El lote ingresado ya existe, por favor valide.';
                         };
                     };
 
-                    if(values.genero_prenda === "") {
+                    if (values.genero_prenda === "") {
                         errors.genero_prenda = 'Por favor seleccione un genero.';
                     };
 
-                    if(values.muestra_fisica === "") {
+                    if (values.muestra_fisica === "") {
                         errors.muestra_fisica = 'Por favor seleccione si existe muestra fisica.';
                     };
 
-                    if(values.cliente_prenda === "") {
+                    if (values.cliente_prenda === "") {
                         errors.cliente_prenda = 'Por favor seleccione un cliente.';
                     };
 
-                    if(values.taller_prenda === "") {
+                    if (values.taller_prenda === "") {
                         errors.taller_prenda = 'Por favor seleccione un taller.';
                     };
 
-                    if(values.tipo_empaque === "") {
-                        errors.tipo_empaque  = 'Por favor seleccione un tipo de empaque.';
+                    if (values.tipo_empaque === "") {
+                        errors.tipo_empaque = 'Por favor seleccione un tipo de empaque.';
                     };
 
-                    if(values.tipo_prenda === "") {
+                    if (values.tipo_prenda === "") {
                         errors.tipo_prenda = 'Por favor ingrese el tipo de la prenda.';
                     };
 
-                    if(!values.talla_prenda) {
+                    if (!values.talla_prenda) {
                         errors.talla_prenda = 'Por favor ingrese la talla de la prenda.';
-                    } else if(!/^[0-9]+$/.test(values.talla_prenda)){
+                    } else if (!/^[0-9]+$/.test(values.talla_prenda)) {
                         errors.talla_prenda = 'Solo se permiten caracteres numericos.'
                     };
 
-                    if(!values.cantidad_existente) {
+                    if (!values.cantidad_existente) {
                         errors.cantidad_existente = 'Por favor ingrese la cantidad de la prenda.';
-                    } else if(!/^[0-9]+$/.test(values.cantidad_existente)){
+                    } else if (!/^[0-9]+$/.test(values.cantidad_existente)) {
                         errors.cantidad_existente = 'Solo se permiten caracteres numericos.'
                     };
                     return errors;
@@ -102,7 +102,7 @@ function AddPrenda(props) {
                         });
                     } else {
                         const add = await axios.post(`http://localhost:5000/api/addPrenda`, values);
-                        if(add.data.status === 404){
+                        if (add.data.status === 404) {
                             swalBootstrap.fire({
                                 title: add.data.message,
                                 text: add.data.error + " Status: " + add.data.status,
@@ -114,11 +114,11 @@ function AddPrenda(props) {
                                 text: 'Se guardo exitosamente',
                                 icon: 'success'
                             }).then(result => {
-                                if (result.isConfirmed){
+                                if (result.isConfirmed) {
                                     window.location.reload();
                                 };
                             });
-                        };                   
+                        };
                     };
                 }}
             >
@@ -126,7 +126,7 @@ function AddPrenda(props) {
                     <Form>
                         <h1 className="display-5 mb-4">Agregar prenda</h1>
                         <div className="input-group mb-2">
-                            <span className="input-group-text">Id  de la prenda</span>
+                            <span className="input-group-text">Id de la prenda</span>
                             <Field
                                 className="form-control"
                                 name="id_prenda"
@@ -139,7 +139,7 @@ function AddPrenda(props) {
                                 {message => <div className="alert alert-danger">{message}</div>}
                             </ErrorMessage>
                         </div>
-                        
+
 
                         <div className="input-group mb-2">
                             <span className="input-group-text">Lote</span>
@@ -160,7 +160,7 @@ function AddPrenda(props) {
                             <span className="input-group-text">Genero de la prenda</span>
                             <Field
                                 component="select"
-                                className="form-select form-select"
+                                className="form-select"
                                 name="genero_prenda"
                                 id="genero_prenda"
                             >
@@ -297,7 +297,7 @@ function AddPrenda(props) {
                                 component="select"
                             >
                                 <option value="">  </option>
-                                {props.taller.map((taller, index) =>(
+                                {props.taller.map((taller, index) => (
                                     <option value={taller.nit} key={index}>{taller.nombre}</option>
                                 ))}
                             </Field>

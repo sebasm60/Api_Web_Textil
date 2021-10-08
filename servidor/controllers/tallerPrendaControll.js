@@ -46,9 +46,9 @@ controller.update = (req, res) => {
 
 controller.delete = (req, res) => {
     try {
-        const { nit } = req.body;
-        cnn_mysql.query(`DELETE FROM taller_prenda WHERE nit = ?`, [nit]);
-        res.json({message: 'Eliminado correctamente', tallerPrenda : nit});
+        const { id } = req.params;
+        cnn_mysql.query(`DELETE FROM taller_prenda WHERE nit = ?`, [id]);
+        res.json({message: 'Eliminado correctamente', tallerPrenda : id});
     } catch (e) {
         res.send({ status: 404, message: 'Error en el servidor', error: e.code });
     };

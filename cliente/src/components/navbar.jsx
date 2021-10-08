@@ -33,19 +33,19 @@ function Navbar(){
                                 <i className="bx bx-grid-alt nav__icon"></i>
                                 <span className="nav__name">Inicio</span>
                             </a>
-                            <a href="http://localhost:3000/perfil" className="nav__link">
+                            <a href="http://localhost:3000/prendas" className="nav__link">
                                 <i className="bx bx-user nav__icon"></i>
-                                <span className="nav__name">Perfil</span>
+                                <span className="nav__name">Prendas</span>
                             </a>
                                 
-                            <a href="/" className="nav__link">
+                            <a href="http://localhost:3000/clientes" className="nav__link">
                                 <i className="bx bx-folder nav__icon"></i>
-                                <span className="nav__name">Proyectos</span>
+                                <span className="nav__name">Clientes</span>
                             </a>
                                 
-                            <a href="/" className="nav__link">
+                            <a href="http://localhost:3000/talleres" className="nav__link">
                                 <i className="bx bx-cart nav__icon"></i>
-                                <span className="nav__name">Item</span>
+                                <span className="nav__name">Talleres</span>
                             </a>
                         </div>
                     </div>

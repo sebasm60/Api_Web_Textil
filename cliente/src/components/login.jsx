@@ -9,23 +9,23 @@ function Login() {
     return(
        <Formik
             initialValues = {{
-                EMAIL: '',
-                PASS: ''
+                email: '',
+                pass: ''
             }}
 
             validate = {(values) => {
                 const errors = {};
 
-                if(!values.PASS) {
-                    errors.PASS = 'Password is required';
-                } else if(values.PASS.length < 3){
-                    errors.PASS = 'Password must be at least 4 characters'
+                if(!values.pass) {
+                    errors.pass = 'Password is required';
+                } else if(values.pass.length < 3){
+                    errors.pass = 'Password must be at least 4 characters'
                 }
                 
-                if(!values.EMAIL) {
-                    errors.EMAIL = 'Email is required';
-                } else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.EMAIL)){
-                    errors.EMAIL = 'Please validate email'
+                if(!values.email) {
+                    errors.email = 'Email is required';
+                } else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)){
+                    errors.email = 'Please validate email'
                 }
 
                 return errors;
@@ -67,12 +67,12 @@ function Login() {
                     <div>
                         <Field 
                         className="input" 
-                        name="EMAIL"
-                        id="EMAIL"
+                        name="email"
+                        id="email"
                         type="email" 
                         placeholder="Email"
                         />
-                        <ErrorMessage ErrorMessage name="EMAIL">
+                        <ErrorMessage ErrorMessage name="email">
                             {message => <div className="error">{message}</div>}
                         </ErrorMessage>
                         
@@ -83,13 +83,13 @@ function Login() {
                     <div>
                         <Field 
                         className="input" 
-                        name="PASS"
-                        id="PASS" 
+                        name="pass"
+                        id="pass" 
                         type="password" 
                         placeholder="Password"
                         />
 
-                        <ErrorMessage ErrorMessage name="PASS">
+                        <ErrorMessage ErrorMessage name="pass">
                             {message => <div className="error">{message}</div>}
                         </ErrorMessage>
                     </div>

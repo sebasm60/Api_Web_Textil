@@ -9,7 +9,7 @@ const app = express();
 require('dotenv').config();
 
 //Configuracion.
-app.set('port', process.env.PORT);
+app.set('port', process.env.PORT || 5000);
 
 //Middlewares.
 app.use(morgan('dev'));

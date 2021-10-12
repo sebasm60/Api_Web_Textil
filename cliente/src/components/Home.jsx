@@ -1,5 +1,5 @@
 import React from "react";
-import Login from "./Login";
+import Login from "./login";
 import Signup from "./signup";
 import './styles/home.css';
 
@@ -25,7 +25,7 @@ function Home() {
                             </p>
                             <button className="ghost" id="signIn" onClick={() => {
                                 document.getElementById('container').classList.remove("right-panel-active");
-                            }}>Sign in</button>
+                            }}>Incia sesion</button>
                         </div>
                         <div className="overlay-panel overlay-right">
                             <h1>Hello, Friend!</h1>
@@ -34,7 +34,7 @@ function Home() {
                             </p>
                             <button className="ghost" id="signUp" onClick={() => {
                                 document.getElementById('container').classList.add("right-panel-active");
-                                }}>Sign up</button>
+                                }}>Registro</button>
                         </div>
                     </div>
                 </div>

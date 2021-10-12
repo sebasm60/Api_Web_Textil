@@ -1,6 +1,6 @@
 import { withFormik, Field, ErrorMessage, Form } from 'formik';
 import axios from "axios";
-import Swal from 'sweetalert';
+import Swal from 'sweetalert2';
 
 function Signup(props) {
 
@@ -17,7 +17,7 @@ function Signup(props) {
                 <div>
                     <Field className="input" name="EMAIL" type="email" placeholder="email"/>
                     <ErrorMessage   ErrorMessage name="EMAIL">
-                        {message => <div className="error">{message}</div>}
+                        {message => <div className="text-danger">{message}</div>}
                     </ErrorMessage>
                 </div>
             </div>
@@ -26,7 +26,7 @@ function Signup(props) {
                 <div>
                     <Field className="input" name="PASS" type="password" placeholder="Password"/>
                     <ErrorMessage   ErrorMessage name="PASS">
-                        {message => <div className="error">{message}</div>}
+                        {message => <div className="text-danger">{message}</div>}
                     </ErrorMessage>
                 </div>
             </div>
@@ -35,7 +35,7 @@ function Signup(props) {
                 type="submit"
                 className={`submit ${isSubmitting || !isValid ? 'disabled' : ''}`}
                 disabled={isSubmitting || !isValid}>
-                Sign In
+                Registrarse
             </button>
         </Form>
     )    

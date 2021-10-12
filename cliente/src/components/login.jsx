@@ -6,6 +6,13 @@ import Swal from 'sweetalert2';
 function Login() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
+    function recordarPass(e){
+        e.preventDefault();
+        Swal.fire({
+            title: 'Recordar contraseña',
+        });
+    }; 
+
     return(
        <Formik
             initialValues = {{
@@ -17,15 +24,15 @@ function Login() {
                 const errors = {};
 
                 if(!values.pass) {
-                    errors.pass = 'Password is required';
+                    errors.pass = 'Ingresa tu contraseña';
                 } else if(values.pass.length < 3){
                     errors.pass = 'Password must be at least 4 characters'
                 }
                 
                 if(!values.email) {
-                    errors.email = 'Email is required';
+                    errors.email = 'Ingresa tu correo';
                 } else if(!/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(values.email)){
-                    errors.email = 'Please validate email'
+                    errors.email = 'Revisa tu correo'
                 }
 
                 return errors;
@@ -61,7 +68,7 @@ function Login() {
                     <a href="/" className="social"><i className="fab fa-google-plus-g"></i></a>
                     <a href="/" className="social"><i className="fab fa-linkedin-in"></i></a>
                 </div>
-                <span>Or use your account</span>
+                <span>Usa tu cuenta</span>
 
                 <div className="input-div">
                     <div>
@@ -73,7 +80,7 @@ function Login() {
                         placeholder="Email"
                         />
                         <ErrorMessage ErrorMessage name="email">
-                            {message => <div className="error">{message}</div>}
+                            {message => <div className="text-danger">{message}</div>}
                         </ErrorMessage>
                         
                     </div>
@@ -90,18 +97,18 @@ function Login() {
                         />
 
                         <ErrorMessage ErrorMessage name="pass">
-                            {message => <div className="error">{message}</div>}
+                            {message => <div className="text-danger">{message}</div>}
                         </ErrorMessage>
                     </div>
                 </div>  
 
-                <a href='/'> Forgot your password? </a>
+                <a href=" " onClick={recordarPass}>¿Olvidaste tu contraseña?</a>
 
                 <button 
                     type="submit"
-                    className={`submit btn ${isSubmitting ? 'disabled' : ''}`}
+                    className={`submit ${isSubmitting ? 'disabled' : ''}`}
                     disabled={isSubmitting}>
-                    Sign In
+                    Conectar
                 </button>
             </Form>
             )}

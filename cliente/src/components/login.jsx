@@ -2,6 +2,7 @@ import { Formik, ErrorMessage, Field, Form } from 'formik';
 import { useState } from 'react';
 import axios from "axios";
 import Swal from 'sweetalert2';
+require('dotenv').config();
 
 function Login() {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -40,7 +41,7 @@ function Login() {
 
             onSubmit= {async (values, formikBag) => {
                 setIsSubmitting(false);
-                const user = await axios.post(`http://localhost:5000/api/login`, values);
+                const user = await axios.post(`http://${process.env.ip}:5000/api/login`, values);
                 
                 if(user.data.messaje === 'User not found'){
                     Swal.fire({

@@ -38,9 +38,9 @@ function Prendas() {
             setPrendas(res.data);
         };
 
-        obtenerClientes();
+        obtenerClientes(); 
         obtenerTalleres();
-        obtenerPrendas();
+        obtenerPrendas();  
     }, []);
 
     return (
@@ -67,23 +67,23 @@ function Prendas() {
 
                 <div className="content-tabs">
                     <div className={toggleState === 1 ? "content active-content" : "content"}>
-                        <Listar
+                        <Listar 
                             cliente={clientesPrendas}
-                            taller={tallerPrendas}
+                            taller = {tallerPrendas}
                             prendas={prendas}
                         />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <AddPrenda
+                        <AddPrenda 
                             cliente={clientesPrendas}
-                            taller={tallerPrendas}
+                            taller = {tallerPrendas}
                             prendas={prendas}
                         />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
                         <Editar
                             cliente={clientesPrendas}
-                            taller={tallerPrendas}
+                            taller = {tallerPrendas}
                         />
                     </div>
                     <div className={toggleState === 4 ? "content active-content" : "content"}>

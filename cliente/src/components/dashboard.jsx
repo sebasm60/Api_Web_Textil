@@ -1,8 +1,8 @@
 import Nav from "./navbar";
 
 function Dashboard() {
-    return(
-        <Nav/>
+    return (
+        <Nav />
     );
 };
 

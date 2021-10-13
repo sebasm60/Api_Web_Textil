@@ -29,11 +29,11 @@ function Listar(props) {
                             <td> {prenda.muestra_fisica}</td>
                             <td> {prenda.tipo_empaque}</td>
                             <td> {prenda.cantidad_existente}</td>
-                            <td> {props.cliente.map((cliente, index)=>(
-                                (prenda.cliente_prenda === cliente.nit)?cliente.nombre:false                                
+                            <td> {props.cliente.map((cliente, index) => (
+                                (prenda.cliente_prenda === cliente.nit) ? cliente.nombre : false
                             ))}</td>
-                            <td>{props.taller.map((taller, index)=>(
-                                (prenda.taller_prenda === taller.nit)?taller.nombre:false                                
+                            <td>{props.taller.map((taller, index) => (
+                                (prenda.taller_prenda === taller.nit) ? taller.nombre : false
                             ))}</td>
                         </tr>
                     ))}

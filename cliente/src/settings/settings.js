@@ -1,7 +1,7 @@
-const urlConfig =({
-    HOST: 'localhost' || '104.196.145.26'
-});
+import env from "react-dotenv";
 
-module.exports = {
-    urlConfig
+const urlConfig = ()=>{
+    return env.REACT_APP_HOST || '104.196.145.26'
 };
+
+export default urlConfig();

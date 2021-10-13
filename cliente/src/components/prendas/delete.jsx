@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Delete() {
 
@@ -30,7 +30,7 @@ function Delete() {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getprenda`, values);
+                    const res = await axios.post(`http://${urlConfig}:5000/api/getprenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {
@@ -50,13 +50,13 @@ function Delete() {
                         })
                             .then((result) => {
                                 if (result.isConfirmed) {
-                                    axios.delete(`http://${urlConfig.HOST}:5000/api/deletePrenda/${values.id_prenda}`);
+                                    axios.delete(`http://${urlConfig}:5000/api/deletePrenda/${values.id_prenda}`);
                                     swalBootstrap.fire({
                                         title: 'Eliminado',
                                         text: 'Registro borrado correctamente',
                                         icon: 'success'
                                     }).then(result => {
-                                        if (result.isConfirmed){
+                                        if (result.isConfirmed) {
                                             window.location.reload();
                                         };
                                     });

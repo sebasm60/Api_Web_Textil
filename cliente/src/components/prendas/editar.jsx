@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Editar(props) {
 
@@ -25,7 +25,7 @@ function Editar(props) {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getprenda`, values);
+                    const res = await axios.post(`http://${urlConfig}:5000/api/getprenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {
@@ -101,27 +101,27 @@ function Editar(props) {
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Cliente de la prenda</span>' +
                                 `<select class="form-select" id="swal-clientePrenda">
-                                    <option value=${res.data[0].cliente_prenda} selected=true>${props.cliente.map(cliente =>(
-                                        (cliente.nit === res.data[0].cliente_prenda)?(cliente.nombre):null                                    
-                                    ))}</option>
+                                    <option value=${res.data[0].cliente_prenda} selected=true>${props.cliente.map(cliente => (
+                                    (cliente.nit === res.data[0].cliente_prenda) ? (cliente.nombre) : null
+                                ))}</option>
                                     ${props.cliente.map((cliente) => (
-                                        `<option value=${cliente.nit}>${cliente.nombre}</option>`
-                                    ))}
+                                    `<option value=${cliente.nit}>${cliente.nombre}</option>`
+                                ))}
                                 </select>` +
                                 '</div>' +
 
                                 '<div class="input-group mb-2">' +
                                 '<span class="input-group-text">Taller de la prenda</span>' +
                                 `<select class="form-select" id="swal-tallerPrenda">
-                                    <option value=${res.data[0].taller_prenda} selected=true>${props.taller.map((taller) =>(
-                                        (taller.nit === res.data[0].taller_prenda)?(taller.nombre):null                                    
-                                    ))}</option>
+                                    <option value=${res.data[0].taller_prenda} selected=true>${props.taller.map((taller) => (
+                                    (taller.nit === res.data[0].taller_prenda) ? (taller.nombre) : null
+                                ))}</option>
                                     ${props.taller.map((taller) => (
-                                        `<option value=${taller.nit}>${taller.nombre}</option>`
-                                    ))}
+                                    `<option value=${taller.nit}>${taller.nombre}</option>`
+                                ))}
                                 </select>` +
                                 '</div>',
-                                
+
                             focusConfirm: false,
                             preConfirm: () => {
                                 return [
@@ -140,7 +140,7 @@ function Editar(props) {
                         })
                             .then(async (result) => {
                                 if (result.isConfirmed) {
-                                    await axios.put(`http://${urlConfig.HOST}:5000/api/updatePrenda`, {
+                                    await axios.put(`http://${urlConfig}:5000/api/updatePrenda`, {
                                         lote: result.value[0],
                                         genero_prenda: result.value[1],
                                         tipo_prenda: result.value[2],
@@ -157,7 +157,7 @@ function Editar(props) {
                                         text: 'Cambios realizados',
                                         icon: 'success'
                                     }).then(result => {
-                                        if(result.isConfirmed)window.location.reload();
+                                        if (result.isConfirmed) window.location.reload();
                                     })
                                 } else {
                                     swalBootstrap.fire({

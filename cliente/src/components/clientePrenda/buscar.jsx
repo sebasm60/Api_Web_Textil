@@ -2,13 +2,13 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Buscar() {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    return(
+    return (
         <div className="container mt-5 ">
             <h1 className="display-5 mb-4"> Buscar cliente </h1>
             <br />
@@ -20,9 +20,9 @@ function Buscar() {
                 validate={(values) => {
                     const errors = {};
 
-                    if(!values.nit) {
+                    if (!values.nit) {
                         errors.nit = 'Por favor ingrese el nit.';
-                    } else if(!/^[0-9]+$/.test(values.nit)){
+                    } else if (!/^[0-9]+$/.test(values.nit)) {
                         errors.nit = 'Solo se permiten caracteres numericos.'
                     };
 
@@ -31,7 +31,7 @@ function Buscar() {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getClientePrenda`, values);
+                    const res = await axios.post(`http://${urlConfig}:5000/api/getClientePrenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {

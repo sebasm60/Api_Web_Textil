@@ -9,7 +9,7 @@ import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Prendas() {
     const [toggleState, setToggleState] = useState(1);
@@ -24,23 +24,23 @@ function Prendas() {
     useEffect(() => {
 
         async function obtenerClientes() {
-            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarClientePrendas`);
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarClientePrendas`);
             setClientesPrendas(res.data);
         };
 
         async function obtenerTalleres() {
-            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarTallerPrendas`);
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarTallerPrendas`);
             setTallerPrendas(res.data);
         };
 
         async function obtenerPrendas() {
-            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarprendas`);
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarprendas`);
             setPrendas(res.data);
         };
 
-        obtenerClientes(); 
+        obtenerClientes();
         obtenerTalleres();
-        obtenerPrendas();  
+        obtenerPrendas();
     }, []);
 
     return (
@@ -67,23 +67,23 @@ function Prendas() {
 
                 <div className="content-tabs">
                     <div className={toggleState === 1 ? "content active-content" : "content"}>
-                        <Listar 
+                        <Listar
                             cliente={clientesPrendas}
-                            taller = {tallerPrendas}
+                            taller={tallerPrendas}
                             prendas={prendas}
                         />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <AddPrenda 
+                        <AddPrenda
                             cliente={clientesPrendas}
-                            taller = {tallerPrendas}
+                            taller={tallerPrendas}
                             prendas={prendas}
                         />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
                         <Editar
                             cliente={clientesPrendas}
-                            taller = {tallerPrendas}
+                            taller={tallerPrendas}
                         />
                     </div>
                     <div className={toggleState === 4 ? "content active-content" : "content"}>

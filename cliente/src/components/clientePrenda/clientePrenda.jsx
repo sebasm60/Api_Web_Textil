@@ -9,7 +9,7 @@ import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Clientes() {
     const [toggleState, setToggleState] = useState(1);
@@ -22,11 +22,11 @@ function Clientes() {
     useEffect(() => {
 
         async function obtenerClientes() {
-            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarClientePrendas`);
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarClientePrendas`);
             setClientes(res.data);
         };
 
-        obtenerClientes();  
+        obtenerClientes();
     }, []);
 
     return (
@@ -58,7 +58,7 @@ function Clientes() {
                         />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <Add/>
+                        <Add />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
                         <Editar />

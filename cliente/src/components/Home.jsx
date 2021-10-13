@@ -5,15 +5,15 @@ import './styles/home.css';
 
 function Home() {
     return (
-       
+
         <div className="container-home">
             <div className="container-login" id="container">
                 <div className="form-container sign-up-container">
-                    <Signup/>
+                    <Signup />
                 </div>
 
                 <div className="form-container sign-in-container">
-                    <Login/>
+                    <Login />
                 </div>
 
                 <div className="overlay-container">
@@ -34,11 +34,11 @@ function Home() {
                             </p>
                             <button className="ghost" id="signUp" onClick={() => {
                                 document.getElementById('container').classList.add("right-panel-active");
-                                }}>Registro</button>
+                            }}>Registro</button>
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
         </div>
     );
 };

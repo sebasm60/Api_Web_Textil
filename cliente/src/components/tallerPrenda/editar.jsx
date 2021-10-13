@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Editar(props) {
 
@@ -25,7 +25,7 @@ function Editar(props) {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getTallerPrenda`, values);
+                    const res = await axios.post(`http://${urlConfig}:5000/api/getTallerPrenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {
@@ -62,7 +62,7 @@ function Editar(props) {
                         })
                             .then(async (result) => {
                                 if (result.isConfirmed) {
-                                    await axios.put(`http://${urlConfig.HOST}:5000/api/updateTallerPrenda`, {
+                                    await axios.put(`http://${urlConfig}:5000/api/updateTallerPrenda`, {
                                         nombre: result.value[0],
                                         numero: result.value[1],
                                         nit: values.nit

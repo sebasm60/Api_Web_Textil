@@ -9,7 +9,7 @@ import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Talleres() {
     const [toggleState, setToggleState] = useState(1);
@@ -22,11 +22,11 @@ function Talleres() {
     useEffect(() => {
 
         async function obtenerTalleres() {
-            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarTallerPrendas`);
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarTallerPrendas`);
             setTalleres(res.data);
         };
 
-        obtenerTalleres();  
+        obtenerTalleres();
     }, []);
 
     return (
@@ -58,7 +58,7 @@ function Talleres() {
                         />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <Add/>
+                        <Add />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
                         <Editar />

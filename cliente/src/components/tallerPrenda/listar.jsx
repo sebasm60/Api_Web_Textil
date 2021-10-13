@@ -1,5 +1,5 @@
 function Listar(props) {
-    return(
+    return (
         <div className="container mt-5 table-responsive">
             <h1 className="display-5 mb-4"> Listar talleres </h1>
             <table className="table table-borderless">

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 function Buscar() {
 
@@ -20,9 +20,9 @@ function Buscar() {
                 validate={(values) => {
                     const errors = {};
 
-                    if(!values.id_prenda) {
+                    if (!values.id_prenda) {
                         errors.id_prenda = 'Por favor ingrese el identificador de la prenda.';
-                    } else if(!/^[0-9]+$/.test(values.id_prenda)){
+                    } else if (!/^[0-9]+$/.test(values.id_prenda)) {
                         errors.id_prenda = 'Solo se permiten caracteres numericos.'
                     };
 
@@ -31,7 +31,7 @@ function Buscar() {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getprenda`, values);
+                    const res = await axios.post(`http://${urlConfig}:5000/api/getprenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {

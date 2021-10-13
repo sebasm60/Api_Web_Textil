@@ -2,13 +2,13 @@ import { Formik, ErrorMessage, Field, Form } from 'formik';
 import { useState } from 'react';
 import axios from "axios";
 import Swal from 'sweetalert2';
-const { urlConfig }  = require('../../settings/settings');
+import urlConfig from '../../settings/settings';
 
 
 function Add(props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    return(
+    return (
         <div className="container mt-5">
             <Formik
                 initialValues={{
@@ -20,21 +20,21 @@ function Add(props) {
                 validate={(values) => {
                     const errors = {};
 
-                    if(!values.nit) {
+                    if (!values.nit) {
                         errors.nit = 'Por favor ingrese el nit.';
-                    } else if(!/^[0-9]+$/.test(values.nit)){
+                    } else if (!/^[0-9]+$/.test(values.nit)) {
                         errors.nit = 'Solo se permiten caracteres numericos.'
                     };
 
-                    if(!values.nombre) {
+                    if (!values.nombre) {
                         errors.nombre = 'Por favor ingrese el nombre.';
-                    } else if(!/^[a-zA-Z]+$/.test(values.nombre)){
+                    } else if (!/^[a-zA-Z]+$/.test(values.nombre)) {
                         errors.nombre = 'Solo se permiten caracteres numericos.'
                     };
 
-                    if(!values.numero) {
+                    if (!values.numero) {
                         errors.numero = 'Por favor ingrese el numero.';
-                    } else if(!/^[0-9]+$/.test(values.numero)){
+                    } else if (!/^[0-9]+$/.test(values.numero)) {
                         errors.numero = 'Solo se permiten caracteres numericos.'
                     };
 
@@ -44,7 +44,7 @@ function Add(props) {
                 onSubmit={async (values) => {
                     setIsSubmitting(false);
 
-                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getTallerPrenda`, values);
+                    const res = await axios.post(`http://${urlConfig}:5000/api/getTallerPrenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {
@@ -61,8 +61,8 @@ function Add(props) {
                             icon: 'error'
                         });
                     } else {
-                        const add = await axios.post(`http://${urlConfig.HOST}:5000/api/addTallerPrenda`, values);
-                        if(add.data.status === 404){
+                        const add = await axios.post(`http://${urlConfig}:5000/api/addTallerPrenda`, values);
+                        if (add.data.status === 404) {
                             swalBootstrap.fire({
                                 title: add.data.message,
                                 text: add.data.error + " Status: " + add.data.status,
@@ -74,11 +74,11 @@ function Add(props) {
                                 text: 'Se guardo exitosamente',
                                 icon: 'success'
                             }).then(result => {
-                                if (result.isConfirmed){
+                                if (result.isConfirmed) {
                                     window.location.reload();
                                 };
                             });
-                        };                   
+                        };
                     };
                 }}
             >
@@ -99,7 +99,7 @@ function Add(props) {
                                 {message => <div className="alert alert-danger">{message}</div>}
                             </ErrorMessage>
                         </div>
-                        
+
 
                         <div className="input-group mb-2">
                             <span className="input-group-text">Nombre</span>

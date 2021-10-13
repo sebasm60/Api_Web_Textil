@@ -26,8 +26,6 @@ function Login() {
 
                 if (!values.pass) {
                     errors.pass = 'Ingresa tu contraseña';
-                } else if (values.pass.length < 3) {
-                    errors.pass = 'Password must be at least 4 characters'
                 }
 
                 if (!values.email) {
@@ -45,14 +43,14 @@ function Login() {
 
                 if (user.data.messaje === 'User not found') {
                     Swal.fire({
-                        title: 'User not found',
-                        text: 'The user does not exist',
+                        title: 'Error',
+                        text: 'El usuario ingresado no existe',
                         icon: 'error'
                     });
                 } else if (user.data.messaje === "Password wrong") {
                     Swal.fire({
-                        title: 'Password wrong',
-                        text: 'The password is incorrect',
+                        title: 'Error',
+                        text: 'La contraseña no es correcta',
                         icon: 'warning'
                     });
                 } else {

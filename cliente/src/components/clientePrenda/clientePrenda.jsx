@@ -9,6 +9,7 @@ import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
+const { urlConfig }  = require('../../settings/settings');
 
 function Clientes() {
     const [toggleState, setToggleState] = useState(1);
@@ -21,7 +22,7 @@ function Clientes() {
     useEffect(() => {
 
         async function obtenerClientes() {
-            const res = await axios.get('http://localhost:5000/api/listarClientePrendas');
+            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarClientePrendas`);
             setClientes(res.data);
         };
 

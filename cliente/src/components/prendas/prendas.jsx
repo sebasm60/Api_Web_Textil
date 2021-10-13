@@ -9,6 +9,7 @@ import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
+const { urlConfig }  = require('../../settings/settings');
 
 function Prendas() {
     const [toggleState, setToggleState] = useState(1);
@@ -23,17 +24,17 @@ function Prendas() {
     useEffect(() => {
 
         async function obtenerClientes() {
-            const res = await axios.get('http://localhost:5000/api/listarClientePrendas');
+            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarClientePrendas`);
             setClientesPrendas(res.data);
         };
 
         async function obtenerTalleres() {
-            const res = await axios.get('http://localhost:5000/api/listarTallerPrendas');
+            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarTallerPrendas`);
             setTallerPrendas(res.data);
         };
 
         async function obtenerPrendas() {
-            const res = await axios.get('http://localhost:5000/api/listarprendas');
+            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarprendas`);
             setPrendas(res.data);
         };
 

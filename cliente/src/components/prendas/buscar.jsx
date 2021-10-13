@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
+const { urlConfig }  = require('../../settings/settings');
 
 function Buscar() {
 
@@ -30,7 +31,7 @@ function Buscar() {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://localhost:5000/api/getprenda`, values);
+                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getprenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {

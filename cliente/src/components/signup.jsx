@@ -1,6 +1,7 @@
 import { withFormik, Field, ErrorMessage, Form } from 'formik';
 import axios from "axios";
 import Swal from 'sweetalert2';
+const { urlConfig }  = require('../settings/settings');
 
 function Signup(props) {
 
@@ -67,7 +68,7 @@ export default withFormik({
 
     async handleSubmit(values, formikBag) {
         formikBag.setSubmitting(false);        
-        const user = await axios.post(`http://localhost:5000/api/signup`, values);
+        const user = await axios.post(`http://${urlConfig.HOST}:5000/api/signup`, values);
 
         if (user.data.error === 11000) {
             Swal({

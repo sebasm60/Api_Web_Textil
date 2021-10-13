@@ -2,6 +2,7 @@ import { useState } from 'react';
 import axios from 'axios';
 import { Formik, ErrorMessage, Field, Form } from 'formik';
 import Swal from 'sweetalert2';
+const { urlConfig }  = require('../../settings/settings');
 
 function Delete() {
 
@@ -29,7 +30,7 @@ function Delete() {
 
                 onSubmit={async (values, formikBag) => {
                     setIsSubmitting(false);
-                    const res = await axios.post(`http://localhost:5000/api/getTallerPrenda`, values);
+                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getTallerPrenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {
@@ -49,7 +50,7 @@ function Delete() {
                         })
                             .then((result) => {
                                 if (result.isConfirmed) {
-                                    axios.delete(`http://localhost:5000/api/deleteTallerPrenda/${values.nit}`);
+                                    axios.delete(`http://${urlConfig.HOST}:5000/api/deleteTallerPrenda/${values.nit}`);
                                     swalBootstrap.fire({
                                         title: 'Eliminado',
                                         text: 'Registro borrado correctamente',

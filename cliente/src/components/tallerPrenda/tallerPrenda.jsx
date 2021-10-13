@@ -9,6 +9,7 @@ import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
 import Nav from '../navbar';
+const { urlConfig }  = require('../../settings/settings');
 
 function Talleres() {
     const [toggleState, setToggleState] = useState(1);
@@ -21,7 +22,7 @@ function Talleres() {
     useEffect(() => {
 
         async function obtenerTalleres() {
-            const res = await axios.get('http://localhost:5000/api/listarTallerPrendas');
+            const res = await axios.get(`http://${urlConfig.HOST}:5000/api/listarTallerPrendas`);
             setTalleres(res.data);
         };
 

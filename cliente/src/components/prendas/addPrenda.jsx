@@ -2,6 +2,7 @@ import { Formik, ErrorMessage, Field, Form } from 'formik';
 import { useState } from 'react';
 import axios from "axios";
 import Swal from 'sweetalert2';
+const { urlConfig }  = require('../../settings/settings');
 
 function AddPrenda(props) {
     const [isSubmitting, setIsSubmitting] = useState(false);
@@ -84,7 +85,7 @@ function AddPrenda(props) {
                 onSubmit={async (values) => {
                     setIsSubmitting(false);
 
-                    const res = await axios.post(`http://localhost:5000/api/getprenda`, values);
+                    const res = await axios.post(`http://${urlConfig.HOST}:5000/api/getprenda`, values);
 
                     const swalBootstrap = Swal.mixin({
                         customClass: {
@@ -101,7 +102,7 @@ function AddPrenda(props) {
                             icon: 'error'
                         });
                     } else {
-                        const add = await axios.post(`http://localhost:5000/api/addPrenda`, values);
+                        const add = await axios.post(`http://${urlConfig.HOST}:5000/api/addPrenda`, values);
                         if (add.data.status === 404) {
                             swalBootstrap.fire({
                                 title: add.data.message,

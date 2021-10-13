@@ -1,11 +1,12 @@
 import './styles/navbar.css';
+const { urlConfig }  = require('../settings/settings');
 
 function Navbar(){
 
     function close() {
         sessionStorage.clear();
         localStorage.clear();
-        window.location.href = 'http://localhost:3000/';
+        window.location.href = `http://${urlConfig.HOST}:3000/`;
     };
 
     return(
@@ -23,27 +24,27 @@ function Navbar(){
             <div className="l-navbar" id="nav-bar">
                 <nav className="nav">
                     <div>
-                        <a href="http://localhost:3000/dashboard" className="nav__logo">
+                        <a href={`http://${urlConfig.HOST}:3000/dashboard" className="nav__logo`}>
                             <i className="bx bx-layer nav__logo-icon"></i>
                             <span className="nav__logo-name">Api textil</span>
                         </a>
 
                         <div className="nav__list">
-                            <a href="http://localhost:3000/dashboard" className="nav__link active">
+                            <a href={`http://${urlConfig.HOST}:3000/dashboard`} className="nav__link active">
                                 <i className="bx bx-grid-alt nav__icon"></i>
                                 <span className="nav__name">Inicio</span>
                             </a>
-                            <a href="http://localhost:3000/prendas" className="nav__link">
+                            <a href={`http://${urlConfig.HOST}:3000/prendas`} className="nav__link">
                                 <i className="bx bx-user nav__icon"></i>
                                 <span className="nav__name">Prendas</span>
                             </a>
                                 
-                            <a href="http://localhost:3000/clientes" className="nav__link">
+                            <a href={`http://${urlConfig.HOST}:3000/clientes`} className="nav__link">
                                 <i className="bx bx-folder nav__icon"></i>
                                 <span className="nav__name">Clientes</span>
                             </a>
                                 
-                            <a href="http://localhost:3000/talleres" className="nav__link">
+                            <a href={`http://${urlConfig.HOST}:3000/talleres`} className="nav__link">
                                 <i className="bx bx-cart nav__icon"></i>
                                 <span className="nav__name">Talleres</span>
                             </a>

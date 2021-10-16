@@ -1,14 +1,13 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import '../styles/tabs.css';
+import '../../assets/css/tabs.css';
 
 import Add from './add';
 import Listar from './listar';
 import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
-import Nav from '../navbar';
 import urlConfig from '../../settings/settings';
 
 function Talleres() {
@@ -31,7 +30,7 @@ function Talleres() {
 
     return (
         <>
-            <Nav />
+           
             <div className="container-tabs">
                 <div className="bloc-tabs">
                     <div className={toggleState === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)}>

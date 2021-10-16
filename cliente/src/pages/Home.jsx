@@ -1,7 +1,7 @@
 import React from "react";
 import Login from "./login";
 import Signup from "./signup";
-import './styles/home.css';
+import '../assets/css/home.css';
 
 function Home() {
     return (

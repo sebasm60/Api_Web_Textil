@@ -41,6 +41,15 @@ CREATE TABLE prendas (
     CONSTRAINT `fk_prenda_taller_prenda` FOREIGN KEY (taller_prenda) REFERENCES taller_prenda (`nit`)
 ) ENGINE=InnoDB;
 
+DROP TABLE IF EXISTS orden_produccion;
+
+CREATE TABLE orden_produccion (
+    nro_orden INT(10) UNSIGNED PRIMARY KEY,
+    id_prenda INT(10) NOT NULL,
+    proceso ENUM ('Lavado', 'Rotura', 'Teñido'),
+    estado ENUM ('Abierto', 'En progreso', 'Terminado', 'Cancelado')
+) ENGINE=InnoDB;
+
 INSERT INTO cliente_prenda(nit, nombre, numero)
 VALUES (30001, 'Estudio F', '1111111'),
 (30002, 'Quest', '2222222'),

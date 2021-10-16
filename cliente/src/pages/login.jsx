@@ -4,6 +4,8 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import urlConfig from '../settings/settings';
 
+import Layout from '../components/layout/Layout'
+
 function Login() {
     const [isSubmitting, setIsSubmitting] = useState(false);
 

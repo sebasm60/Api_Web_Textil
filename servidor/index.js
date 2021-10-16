@@ -22,6 +22,7 @@ app.use('/api', require('./routes/accountsRoutes'));
 app.use('/api', require('./routes/prendasRoutes'));
 app.use('/api', require('./routes/clientePrendaRoutes'));
 app.use('/api', require('./routes/tallerPrendaRoutes'));
+app.use('/api', require('./routes/cardsRoute'));
 
 //Iniciar el servidor.
 app.listen(app.get('port'), () => {

@@ -1,21 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import '../styles/tabs.css';
-
-import AddPrenda from './addPrenda';
+import Add from './add';
 import Listar from './listar';
 import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
-import Nav from '../navbar';
 import urlConfig from '../../settings/settings';
 
-function Prendas() {
+function Clientes() {
     const [toggleState, setToggleState] = useState(1);
-    const [clientesPrendas, setClientesPrendas] = useState([]);
-    const [tallerPrendas, setTallerPrendas] = useState([]);
-    const [prendas, setPrendas] = useState([]);
+    const [clientes, setClientes] = useState([]);
 
     const toggleTab = (index) => {
         setToggleState(index);
@@ -25,27 +20,14 @@ function Prendas() {
 
         async function obtenerClientes() {
             const res = await axios.get(`http://${urlConfig}:5000/api/listarClientePrendas`);
-            setClientesPrendas(res.data);
+            setClientes(res.data);
         };
 
-        async function obtenerTalleres() {
-            const res = await axios.get(`http://${urlConfig}:5000/api/listarTallerPrendas`);
-            setTallerPrendas(res.data);
-        };
-
-        async function obtenerPrendas() {
-            const res = await axios.get(`http://${urlConfig}:5000/api/listarprendas`);
-            setPrendas(res.data);
-        };
-
-        obtenerClientes(); 
-        obtenerTalleres();
-        obtenerPrendas();  
+        obtenerClientes();
     }, []);
 
     return (
         <>
-            <Nav />
             <div className="container-tabs">
                 <div className="bloc-tabs">
                     <div className={toggleState === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)}>
@@ -67,24 +49,15 @@ function Prendas() {
 
                 <div className="content-tabs">
                     <div className={toggleState === 1 ? "content active-content" : "content"}>
-                        <Listar 
-                            cliente={clientesPrendas}
-                            taller = {tallerPrendas}
-                            prendas={prendas}
+                        <Listar
+                            clientes={clientes}
                         />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <AddPrenda 
-                            cliente={clientesPrendas}
-                            taller = {tallerPrendas}
-                            prendas={prendas}
-                        />
+                        <Add />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
-                        <Editar
-                            cliente={clientesPrendas}
-                            taller = {tallerPrendas}
-                        />
+                        <Editar />
                     </div>
                     <div className={toggleState === 4 ? "content active-content" : "content"}>
                         <Buscar />
@@ -98,4 +71,4 @@ function Prendas() {
     );
 };
 
-export default Prendas;
+export default Clientes;

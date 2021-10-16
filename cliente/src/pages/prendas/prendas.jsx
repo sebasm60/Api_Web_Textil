@@ -1,19 +1,18 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import '../styles/tabs.css';
-
-import Add from './add';
+import AddPrenda from './addPrenda';
 import Listar from './listar';
 import Delete from './delete';
 import Buscar from './buscar';
 import Editar from './editar';
-import Nav from '../navbar';
 import urlConfig from '../../settings/settings';
 
-function Clientes() {
+function Prendas() {
     const [toggleState, setToggleState] = useState(1);
-    const [clientes, setClientes] = useState([]);
+    const [clientesPrendas, setClientesPrendas] = useState([]);
+    const [tallerPrendas, setTallerPrendas] = useState([]);
+    const [prendas, setPrendas] = useState([]);
 
     const toggleTab = (index) => {
         setToggleState(index);
@@ -23,15 +22,26 @@ function Clientes() {
 
         async function obtenerClientes() {
             const res = await axios.get(`http://${urlConfig}:5000/api/listarClientePrendas`);
-            setClientes(res.data);
+            setClientesPrendas(res.data);
         };
 
-        obtenerClientes();
+        async function obtenerTalleres() {
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarTallerPrendas`);
+            setTallerPrendas(res.data);
+        };
+
+        async function obtenerPrendas() {
+            const res = await axios.get(`http://${urlConfig}:5000/api/listarprendas`);
+            setPrendas(res.data);
+        };
+
+        obtenerClientes(); 
+        obtenerTalleres();
+        obtenerPrendas();  
     }, []);
 
     return (
         <>
-            <Nav />
             <div className="container-tabs">
                 <div className="bloc-tabs">
                     <div className={toggleState === 1 ? "tabs active-tabs" : "tabs"} onClick={() => toggleTab(1)}>
@@ -53,15 +63,24 @@ function Clientes() {
 
                 <div className="content-tabs">
                     <div className={toggleState === 1 ? "content active-content" : "content"}>
-                        <Listar
-                            clientes={clientes}
+                        <Listar 
+                            cliente={clientesPrendas}
+                            taller = {tallerPrendas}
+                            prendas={prendas}
                         />
                     </div>
                     <div className={toggleState === 2 ? "content active-content" : "content"}>
-                        <Add />
+                        <AddPrenda 
+                            cliente={clientesPrendas}
+                            taller = {tallerPrendas}
+                            prendas={prendas}
+                        />
                     </div>
                     <div className={toggleState === 3 ? "content active-content" : "content"}>
-                        <Editar />
+                        <Editar
+                            cliente={clientesPrendas}
+                            taller = {tallerPrendas}
+                        />
                     </div>
                     <div className={toggleState === 4 ? "content active-content" : "content"}>
                         <Buscar />
@@ -75,4 +94,4 @@ function Clientes() {
     );
 };
 
-export default Clientes;
+export default Prendas;
